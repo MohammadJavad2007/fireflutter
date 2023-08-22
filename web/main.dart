@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 final InputElement toDoInput = querySelector('#to-do-input') as InputElement;
 final UListElement toDoList = querySelector('#to-do-list') as UListElement;
+final ButtonElement deleteAll = querySelector('#delete-all') as ButtonElement;
 
 final dio = Dio();
 void get() async {
@@ -14,6 +15,7 @@ void get() async {
   // querySelector('#id')?.text = response.data[0]['Name'].toString();
   // querySelector('#name')?.text = response.data[0]['Age'].toString();
   final newToDo = LIElement()..text = response.data[0]['Name'].toString();
+  newToDo.onClick.listen((_) => newToDo.remove());
   toDoInput.value = '';
   toDoList.children.add(newToDo);
 }
@@ -34,6 +36,7 @@ void post() async {
 
 void main() {
   toDoInput.onChange.listen(addToDoItem);
+  deleteAll.onClick.listen((_) => toDoList.children.clear());
 }
 
 void addToDoItem(Event e) {
