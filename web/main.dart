@@ -15,10 +15,7 @@ void get() async {
   int i = 0;
   for (i; i < response.data.length; i++) {
     final newToDo = LIElement()
-      ..text = response.data[i]['id'].toString() +
-          ' ' +
-          response.data[i]['Name'].toString();
-
+      ..text = '${response.data[i]['id']} ${response.data[i]['Name']}';
     newToDo.onClick.listen((_) async {
       print(newToDo.innerText.split(' ')[0]);
       response = await dio.delete(
@@ -49,9 +46,7 @@ void post() async {
       ));
   print(response.data.toString());
   final newToDo = LIElement()
-    ..text = response.data[0]['id'].toString() +
-        ' ' +
-        response.data[0]['Name'].toString();
+    ..text = '${response.data[0]['id']} ${response.data[0]['Name']}';
   newToDo.onClick.listen((_) async {
     print(newToDo.innerText.split(' ')[0]);
     response = await dio.delete(
